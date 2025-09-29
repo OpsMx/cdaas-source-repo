@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: two-git-repo-app
+  namespace: argocd
+spec:
+  project: customer
+  source:
+      repoURL: 'https://github.com/OpsMx/cdaas.git'
+      targetRevision: main
+      path: apps/resources/two-src-app/one-src
+    # - repoURL: 'https://github.com/OpsMx/cdaas.git'
+    #   targetRevision: main
+    #   path: apps/resources/two-src-app/two-src
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: two-repo-sources
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
