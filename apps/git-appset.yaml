@@ -12,7 +12,7 @@ spec:
               repoURL: https://github.com/OpsMx/cdaas-source-repo.git   #  Replace with actual repo
               revision: main
               directories:
-                - path: apps/resources/git-appset-src/*     #  Adjust path as needed
+                - path: apps/resources/git-appset-src/*    #  Adjust path as needed
 
           # 2️ Environment list
           - list:
