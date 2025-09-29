@@ -6,10 +6,10 @@ metadata:
 spec:
   project: customer
   source:
-      repoURL: 'https://github.com/OpsMx/cdaas.git'
+      repoURL: 'https://github.com/OpsMx/cdaas-source-repo.git'
       targetRevision: main
       path: apps/resources/two-src-app/one-src
-    # - repoURL: 'https://github.com/OpsMx/cdaas.git'
+    # - repoURL: 'https://github.com/OpsMx/cdaas-source-repo.git'
     #   targetRevision: main
     #   path: apps/resources/two-src-app/two-src
   destination:
