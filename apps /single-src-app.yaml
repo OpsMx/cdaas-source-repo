@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: single-src-app
+  namespace: argocd
+spec:
+  project: customer
+  source:
+    repoURL: 'https://github.com/OpsMx/cdaas.git'
+    path: apps/resources/single-src
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: single-src
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
