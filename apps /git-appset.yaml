@@ -9,7 +9,7 @@ spec:
         generators:
           # 1️ Git generator for subdirectories (apps)
           - git:
-              repoURL: https://github.com/OpsMx/cdaas.git   #  Replace with actual repo
+              repoURL: https://github.com/OpsMx/cdaas-source-repo.git   #  Replace with actual repo
               revision: main
               directories:
                 - path: apps/resources/git-appset-src/*     #  Adjust path as needed
@@ -28,7 +28,7 @@ spec:
     spec:
       project: customer
       source:
-        repoURL: https://github.com/OpsMx/cdaas.git 
+        repoURL: https://github.com/OpsMx/cdaas-source-repo.git 
         targetRevision: main
         path: '{{path}}'                  # e.g., applications/resources/git-appset-src/backend
       destination:
