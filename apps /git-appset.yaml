@@ -1,0 +1,88 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: git-appset-application
+  namespace: argocd
+spec:
+  generators:
+    - matrix:
+        generators:
+          # 1️ Git generator for subdirectories (apps)
+          - git:
+              repoURL: https://github.com/OpsMx/cdaas.git   #  Replace with actual repo
+              revision: main
+              directories:
+                - path: apps/resources/git-appset-src/*     #  Adjust path as needed
+
+          # 2️ Environment list
+          - list:
+              elements:
+                - env: dev
+                  namespace: dev
+                - env: prod
+                  namespace: prod
+
+  template:
+    metadata:
+      name: '{{path.basename}}-{{env}}'   # e.g., frontend-dev
+    spec:
+      project: customer
+      source:
+        repoURL: https://github.com/OpsMx/cdaas.git 
+        targetRevision: main
+        path: '{{path}}'                  # e.g., applications/resources/git-appset-src/backend
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{namespace}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+
+
+
+# apiVersion: argoproj.io/v1alpha1
+# kind: ApplicationSet
+# metadata:
+#   name: git-appset
+#   namespace: argocd
+# spec:
+#   generators:
+#     - matrix:
+#         generators:
+#           # 1️ Git directory generator — finds subdirectories in the repo
+#           - git:
+#               repoURL: https://github.com/NaveenBalagouni/argocd-training.git  #  Update this
+#               revision: main
+#               directories:
+#                 - path: applications/resources/git-appset-src/*     #  Update to your actual structure
+
+#           # 2️ List generator for environments
+#           - list:
+#               elements:
+#                 - env: dev
+#                   namespace: dev
+#                 - env: prod
+#                   namespace: prod
+
+#   template:
+#     metadata:
+#       name: '{{path.basename}}-new'    #  RFC1123-compliant name
+#     spec:
+#       project: default
+#       source:
+#         repoURL: https://github.com/NaveenBalagouni/argocd-training.git        #  Same repo as above
+#         targetRevision: main
+#         path: '{{path}}'                                            # e.g., applications/resources/git-appset-src/frontend
+#         helm:
+#           releaseName: '{{path.basename}}-{{env}}'
+#           valueFiles:
+#             - values-{{env}}.yaml                                   # Each app dir must include this file
+#       destination:
+#         server: https://kubernetes.default.svc
+#         namespace: '{{namespace}}'
+#         createNamespace: true
+#       syncPolicy:
+#         automated:
+#           prune: true
+#           selfHeal: true
