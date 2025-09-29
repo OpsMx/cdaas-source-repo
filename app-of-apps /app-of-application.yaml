@@ -1,0 +1,95 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-apps
+  namespace: argocd
+spec:
+  project: customer
+  source:
+    repoURL: 'https://github.com/OpsMx/cdaas.git'
+    path: apps
+    targetRevision: main
+    # directory:
+    #   recurse: true
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: app-of-applications
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: argocd-apps
+#   namespace: argocd
+# spec:
+#   project: customer
+#   source:
+#     repoURL: https://github.com/OpsMx/cdaas.git
+#     targetRevision: main
+#     path: apps/
+#     directory:
+#       recurse: true
+#   destination:
+#     server: https://kubernetes.default.svc
+#     namespace: app-of-applications
+#   syncPolicy:
+#     # automated:
+#     #   prune: true
+#     #   selfHeal: true
+#     #   allowEmpty: true
+#     retry:
+#       limit: 10
+#       backoff:
+#         duration: 5s
+#         factor: 2
+#         maxDuration: 5m
+#     syncOptions:
+#       - CreateNamespace=false
+#       - FailOnSharedResource=true
+#       - Prune=false           # Prevent deletion of resources missing in Git
+#       - SelfHeal=true
+
+
+
+
+
+
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   labels:
+#     name: argocd-apps
+#   name: argocd-apps
+#   namespace: argocd
+# spec:
+#   destination:
+#     namespace: argocd
+#     server: https://kubernetes.default.svc
+#   project: customer
+#   source:
+#     directory:
+#       recurse: true
+#     path: apps
+#     repoURL: https://github.com/OpsMx/cdaas.git
+#     targetRevision: main
+#   syncPolicy:
+#  #   automated:
+#   #    allowEmpty: true
+#    #   prune: true
+#     #  selfHeal: true
+#     retry:
+#       backoff:
+#         duration: 5s
+#         factor: 2
+#         maxDuration: 5m
+#       limit: 10
+#     syncOptions:
+#     - CreateNamespace=false
+#     - FailOnSharedResource=true
+#     - Prune=false           # Prevent deletion of resources missing in Git
+#     - SelfHeal=true 
