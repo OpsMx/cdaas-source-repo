@@ -6,7 +6,7 @@ metadata:
 spec:
   project: customer
   source:
-    repoURL: 'https://github.com/OpsMx/cdaas.git'
+    repoURL: 'https://github.com/OpsMx/cdaas-source-repo.git'
     path: apps
     targetRevision: main
     # directory:
@@ -29,7 +29,7 @@ spec:
 # spec:
 #   project: customer
 #   source:
-#     repoURL: https://github.com/OpsMx/cdaas.git
+#     repoURL: https://github.com/OpsMx/cdaas-source-repo.git
 #     targetRevision: main
 #     path: apps/
 #     directory:
@@ -75,7 +75,7 @@ spec:
 #     directory:
 #       recurse: true
 #     path: apps
-#     repoURL: https://github.com/OpsMx/cdaas.git
+#     repoURL: https://github.com/OpsMx/cdaas-source-repo.git
 #     targetRevision: main
 #   syncPolicy:
 #  #   automated:
