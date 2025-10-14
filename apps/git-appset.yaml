@@ -36,6 +36,10 @@ spec:
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{namespace}}'
+      info:
+      - name: appset
+        value: "description"
+
       syncPolicy:
         automated:
           prune: true
