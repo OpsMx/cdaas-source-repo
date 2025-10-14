@@ -25,6 +25,8 @@ spec:
   template:
     metadata:
       name: '{{path.basename}}-{{env}}'   # e.g., frontend-dev
+      labels:
+         app: appset-src
     spec:
       project: customer
       source:
