@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: 1.22.0-alpine
+        image: nginx:1.22.0-alpine
         ports:
         - containerPort: 80
         envFrom:
